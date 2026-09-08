@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veille · сторож французских вакансий</title>
+<meta name="description" content="Бот обходит семь французских площадок с вакансиями и присылает в Telegram только новое. Подписки нулевые.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#05080F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Veille · сторож французских вакансий">
+<meta property="og:description" content="Семь французских площадок, одно сообщение в Telegram в день, ноль подписок.">
+<meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2305080F'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23F5B93F' font-family='Georgia,serif'>V</text></svg>">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="gridbg" aria-hidden="true"></div>
+
+<div class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="badge"><i></i><span>Предложение</span></div>
+      <h1>Veille</h1>
+      <div class="h1-sub">Сторож французских вакансий</div>
+      <p class="hero-lede">
+        Я соберу бота, который обходит семь французских площадок и присылает тебе
+        <b>только то, чего вчера не было</b>. Ты открываешь Telegram и жмёшь на ссылки.
+        Подписки нулевые.
+      </p>
+      <div class="chips">
+        <span class="chip b"><b>7</b><span>источников</span></span>
+        <span class="chip a"><b>1</b><span>сообщение в день</span></span>
+        <span class="chip g"><b>0 €</b><span>подписок</span></span>
+      </div>
+    </div>
+
+    <div class="phone">
+      <span class="notch"></span><span class="speaker"></span><span class="camera"></span>
+      <span class="pbtn a"></span><span class="pbtn b"></span><span class="pbtn c"></span><span class="pbtn d"></span>
+      <div class="screen">
+        <div class="sbar">
+          <span>9:14</span>
+          <span class="sbar-r"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span>
+        </div>
+        <div class="tgbar">
+          <span class="tgback">&#8249;</span>
+          <div class="tgav">V</div>
+          <div><b>Veille</b><em>bot</em></div>
+        </div>
+        <div class="tgbody">
+          <span class="tgday">Сегодня</span>
+          <div class="tgmsg in" id="tgcard">
+            <div class="tgrole" id="c-role"></div>
+            <div class="tgmeta">
+              <div><i>Компания</i> <span id="c-comp"></span></div>
+              <div><i>Место</i> <span id="c-loc"></span></div>
+              <div><i>Контракт</i> <span id="c-contract"></span></div>
+              <div><i>Источник</i> <span id="c-src"></span></div>
+            </div>
+            <div class="tgtags" id="c-tags"></div>
+            <div class="tgbtns">
+              <div class="tgbtn pri">откликнулась</div>
+              <div class="tgbtn">не подходит</div>
+            </div>
+            <div class="tgtime" id="c-time"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Что происходит сейчас</span>
+  <h2>Семь вкладок каждое утро</h2>
+  <p class="lede">
+    Ты открываешь HelloWork, Meteojob, BeBee и остальные, выставляешь фильтры заново
+    и листаешь карточки, которые видела вчера. Новых за сутки набирается одна или ноль.
+  </p>
+
+  <div class="grid4">
+    <div class="panel pain"><div class="pad">
+      <span class="num r">1</span><h4>Фильтры слетают</h4>
+      <p>Télétravail и alternance приходится ставить заново на каждой площадке.</p>
+    </div></div>
+    <div class="panel pain"><div class="pad">
+      <span class="num r">2</span><h4>Те же карточки</h4>
+      <p>Девять позиций из десяти ты уже просматривала вчера.</p>
+    </div></div>
+    <div class="panel pain"><div class="pad">
+      <span class="num r">3</span><h4>Память вместо базы</h4>
+      <p>Куда откликалась, держишь в голове. К третьей неделе это перестаёт работать.</p>
+    </div></div>
+    <div class="panel pain"><div class="pad">
+      <span class="num r">4</span><h4>Пропуски</h4>
+      <p>Свежая вакансия держится в топе сутки. Пропустила день, она ушла вниз.</p>
+    </div></div>
+  </div>
+
+  <div class="panel flat" style="margin-top:16px"><div class="pad" style="padding:24px 26px">
+    <div class="phead">
+      <div class="phead-l">
+        <span class="picon warm"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <h3>Сколько это стоит времени</h3>
+      </div>
+      <span class="pill n"><i></i>расчёт от твоей цифры</span>
+    </div>
+
+    <div class="slider-row">
+      <input type="range" id="mins" min="5" max="90" step="5" value="30" aria-label="Минут в день на проверку площадок">
+      <span class="sval" id="minsval">30 мин в день</span>
+    </div>
+
+    <div class="mstats" style="margin-top:16px">
+      <div class="mstat"><span class="l">В месяц</span><span class="v" id="perMonth">15 ч</span><span class="d warn">руками</span></div>
+      <div class="mstat"><span class="l">В год</span><span class="v" id="perYear">182 ч</span><span class="d warn">руками</span></div>
+      <div class="mstat"><span class="l">Рабочих дней в год</span><span class="v" id="workDays">23</span><span class="d warn">руками</span></div>
+      <div class="mstat"><span class="l">Останется в день</span><span class="v" id="after">2 мин</span><span class="d">с ботом</span></div>
+    </div>
+
+    <div class="legend">
+      <span><i style="background:#F5B93F"></i>Как сейчас</span>
+      <span><i style="background:#31C98B"></i>С ботом</span>
+    </div>
+    <div class="chart" id="hoursChart"></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Что приходит в Telegram</span>
+  <h2>Одно сообщение вместо обхода</h2>
+  <p class="lede">Слева журнал одного прогона, справа разбор того, что попадает в карточку.</p>
+
+  <div class="split-term">
+    <div class="term">
+      <div class="tools">
+        <span class="circle"><span class="box red"></span></span>
+        <span class="circle"><span class="box yellow"></span></span>
+        <span class="circle"><span class="box green"></span></span>
+        <span class="tname">veille · прогон</span>
+      </div>
+      <div class="tbody" id="term"></div>
+    </div>
+
+    <div>
+      <div class="panel" style="margin-bottom:12px"><div class="pad" style="display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:start">
+        <span class="num">1</span>
+        <div><b style="display:block;font-size:15px;margin-bottom:4px">Одна вакансия приходит один раз</b>
+        <span style="font-size:14px;color:var(--ink-soft)">Склейка идёт по адресу и по паре «должность плюс компания». Дубли из трёх источников превращаются в одну карточку.</span></div>
+      </div></div>
+      <div class="panel" style="margin-bottom:12px"><div class="pad" style="display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:start">
+        <span class="num">2</span>
+        <div><b style="display:block;font-size:15px;margin-bottom:4px">Формат работы разобран по тексту</b>
+        <span style="font-size:14px;color:var(--ink-soft)">У France Travail и La Bonne Alternance фильтра по télétravail нет. Отрицания перевешивают: <code style="color:var(--amber)">100 % SUR SITE</code> гасит случайное <code>distanciel</code> ниже в описании.</span></div>
+      </div></div>
+      <div class="panel" style="margin-bottom:12px"><div class="pad" style="display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:start">
+        <span class="num">3</span>
+        <div><b style="display:block;font-size:15px;margin-bottom:4px">Кнопка помнит за тебя</b>
+        <span style="font-size:14px;color:var(--ink-soft)">«Откликнулась» гасит вакансию навсегда. «Не подходит» копит примеры, по которым я правлю фильтры.</span></div>
+      </div></div>
+      <div class="panel"><div class="pad" style="display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:start">
+        <span class="num a">4</span>
+        <div><b style="display:block;font-size:15px;margin-bottom:4px">Второй поток: компании без объявлений</b>
+        <span style="font-size:14px;color:var(--ink-soft)">La Bonne Alternance отдаёт работодателей, которые берут альтернантов и вакансий не публикуют. Вокруг Руана таких 33 против 10 опубликованных.</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Источники</span>
+  <h2>Семь французских площадок</h2>
+  <p class="lede">Цифры я снял с их живой выдачи по запросу <code style="color:var(--amber)">Développeur web</code>.</p>
+
+  <div class="grid3">
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">France Travail</span><span class="stype">API</span></div>
+      <div class="sval2"><b>~1 600</b><em>вакансий</em></div>
+      <p class="sdesc">Государственный API по всей Франции. Альтернанс идёт отдельными кодами контракта: около 60 по <code>E2</code> и 13 по <code>FS</code>.</p>
+      <div class="sbarline"><i data-w="100" style="background:linear-gradient(90deg,#31C98B,#6294F5)"></i></div>
+    </div></div>
+
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">La Bonne Alternance</span><span class="stype">API</span></div>
+      <div class="sval2"><b>43</b><em>результата у Руана</em></div>
+      <p class="sdesc">Государственный сервис под альтернанс. Вокруг Руана 10 объявлений и 33 компании для прямого обращения.</p>
+      <div class="sbarline"><i data-w="46" style="background:linear-gradient(90deg,#31C98B,#6294F5)"></i></div>
+    </div></div>
+
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">Adzuna FR</span><span class="stype">API</span></div>
+      <div class="sval2"><b>2 500</b><em>запросов в месяц</em></div>
+      <p class="sdesc">Бесплатный тариф. Расход у нас около 300, запас восьмикратный.</p>
+      <div class="sbarline"><i data-w="70" style="background:linear-gradient(90deg,#31C98B,#6294F5)"></i></div>
+    </div></div>
+
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">HelloWork</span><span class="stype">прямой сбор</span></div>
+      <div class="sval2"><b>350+</b><em>предложений</em></div>
+      <p class="sdesc">Отдаёт карточки обычным запросом на страницах, которые сам разрешает роботам. Готовый срез по Руану у них уже есть.</p>
+      <div class="sbarline"><i data-w="82" style="background:linear-gradient(90deg,#6294F5,#8B7BF0)"></i></div>
+    </div></div>
+
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">Meteojob</span><span class="stype">оповещения</span></div>
+      <div class="sval2"><b>IMAP</b><em>рассылка площадки</em></div>
+      <p class="sdesc">Тут стоит капча, поэтому беру их собственную рассылку на выделенный ящик. Защиту не трогаю.</p>
+      <div class="sbarline"><i data-w="40" style="background:linear-gradient(90deg,#F5B93F,#E4674E)"></i></div>
+    </div></div>
+
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">BeBee и lindustrie</span><span class="stype">прямой сбор</span></div>
+      <div class="sval2"><b>2</b><em>площадки</em></div>
+      <p class="sdesc">Карточки открыты по robots.txt. Файл перечитывается перед каждым прогоном, правила поменяются, сбор встанет сам.</p>
+      <div class="sbarline"><i data-w="38" style="background:linear-gradient(90deg,#6294F5,#8B7BF0)"></i></div>
+    </div></div>
+
+    <div class="panel"><div class="pad">
+      <div class="srow"><span class="sname">Welcome to the Jungle</span><span class="stype">оповещения</span></div>
+      <div class="sval2"><b>alerte</b><em>tech и digital</em></div>
+      <p class="sdesc">Профильная площадка. Заходит тем же почтовым каналом, что и Meteojob.</p>
+      <div class="sbarline"><i data-w="44" style="background:linear-gradient(90deg,#F5B93F,#E4674E)"></i></div>
+    </div></div>
+
+    <div class="panel flat"><div class="pad">
+      <div class="srow"><span class="sname" style="color:var(--ink-faint)">LinkedIn</span><span class="stype">убран</span></div>
+      <p class="sdesc" style="margin-top:6px">Запрет на автоматический доступ стоит в первой строке их robots.txt, а под удар попадает аккаунт, с которого ты откликаешься. Французские площадки закрывают тему без него.</p>
+    </div></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Механика</span>
+  <h2>Три слоя сбора, один процесс</h2>
+
+  <div class="split-mech">
+    <div class="pipe">
+      <div class="panel"><div class="pad"><div class="prow">
+        <span class="num">1</span>
+        <div><b>Официальные API</b><span>France Travail по OAuth2, La Bonne Alternance по токену, Adzuna по ключу.</span></div>
+        <span class="ptag">бесплатно</span>
+      </div></div></div>
+      <div class="panel"><div class="pad"><div class="prow">
+        <span class="num">2</span>
+        <div><b>Почтовые оповещения</b><span>Площадки с закрытым поиском присылают свежее сами, бот читает ящик по IMAP.</span></div>
+        <span class="ptag">бесплатно</span>
+      </div></div></div>
+      <div class="panel"><div class="pad"><div class="prow">
+        <span class="num">3</span>
+        <div><b>Прямой сбор</b><span>Только там, где robots.txt это разрешает, с паузой между запросами.</span></div>
+        <span class="ptag">бесплатно</span>
+      </div></div></div>
+      <div class="panel"><div class="pad"><div class="prow">
+        <span class="num a">4</span>
+        <div><b>Склейка, отсев, отправка</b><span>Дубли схлопываются, остаётся свежее за неделю, télétravail разбирается по тексту.</span></div>
+        <span class="ptag">SQLite</span>
+      </div></div></div>
+    </div>
+
+    <div class="panel flat"><div class="pad beams">
+      <svg viewBox="0 0 420 320" role="img" aria-label="Семь источников сходятся в одного бота">
+        <defs>
+          <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#6294F5" stop-opacity="0"/>
+            <stop offset="48%" stop-color="#8B7BF0" stop-opacity=".95"/>
+            <stop offset="100%" stop-color="#31C98B" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="hubg"><stop offset="0%" stop-color="#9BBCFF"/><stop offset="100%" stop-color="#2A4585"/></radialGradient>
+          <filter id="hglow" x="-140%" y="-140%" width="380%" height="380%">
+            <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g id="bPaths"></g><g id="bNodes"></g>
+        <circle cx="352" cy="160" r="28" fill="url(#hubg)" opacity=".22" filter="url(#hglow)"></circle>
+        <circle cx="352" cy="160" r="20" fill="#0A0E1A" stroke="#6294F5" stroke-width="1.4"></circle>
+        <path d="M343 160 l17 -6.5 -5.5 16.5 -3.5 -6.5 -8 -3.5 z" fill="#6294F5"></path>
+        <text x="352" y="204" fill="#93A0BC" font-family="Archivo, sans-serif" font-size="11.5" font-weight="600" text-anchor="middle">Telegram</text>
+      </svg>
+    </div></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Деньги</span>
+  <h2>Сколько стоили бы сервисы</h2>
+  <p class="lede">
+    Я начинал с поиска платного сервиса-прокладки. Французские площадки отдали данные без него,
+    и подписка обнулилась.
+  </p>
+
+  <div class="panel flat"><div class="pad" style="padding:24px 26px">
+    <div class="phead">
+      <div class="phead-l">
+        <span class="picon good"><svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+        <h3>Подписка за месяц</h3>
+      </div>
+      <span class="pill"><i></i>у нас 0 €</span>
+    </div>
+
+    <div class="mstats">
+      <div class="mstat"><span class="l">Дешёвый платный вариант</span><span class="v">29 $</span><span class="d warn">Apify Starter</span></div>
+      <div class="mstat"><span class="l">Дорогой вариант</span><span class="v">249 $</span><span class="d warn">Octoparse</span></div>
+      <div class="mstat"><span class="l">Наша схема</span><span class="v" style="color:var(--green)">0 $</span><span class="d">семь источников</span></div>
+      <div class="mstat"><span class="l">Экономия за год</span><span class="v" style="color:var(--green)">348 $</span><span class="d">против Apify</span></div>
+    </div>
+
+    <div class="chart-money" id="moneyChart"></div>
+  </div></div>
+
+  <div class="panel flat" style="margin-top:14px"><div class="pad">
+    <p class="sdesc" style="max-width:none">
+      Почему получилось без них: HelloWork, BeBee и lindustrie-recrute отдают карточки простым запросом,
+      France Travail и La Bonne Alternance это государственные API с бесплатным доступом,
+      а Meteojob и Welcome to the Jungle заходят собственной почтовой рассылкой.
+    </p>
+  </div></div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Условия</span>
+  <h2>Кто что даёт</h2>
+  <div class="deal">
+    <div class="panel"><div class="pad" style="padding:26px 28px">
+      <div class="phead">
+        <div class="phead-l">
+          <span class="picon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          <h3>Беру на себя</h3>
+        </div>
+      </div>
+      <ul class="dlist">
+        <li><b>Разбор источников.</b> Уже сделан: восемь площадок проверены, robots.txt снят, объёмы замерены, тарифы сервисов сравнены.</li>
+        <li><b>Сборку.</b> Python и SQLite, три слоя сбора, склейка дублей, разбор формата работы, бот с кнопками.</li>
+        <li><b>Настройку под тебя.</b> Коды ROME, радиус, ключевые слова и словарь удалёнки я выставлю по твоим ответам.</li>
+        <li><b>Запуск и инструкцию.</b> Проверю на живой выдаче и напишу короткую инструкцию.</li>
+        <li><b>Правки первый месяц.</b> Дотачиваю фильтры по кнопке «не подходит». Площадка сменит вёрстку, чиню.</li>
+      </ul>
+    </div></div>
+
+    <div class="panel her"><div class="pad" style="padding:26px 28px">
+      <div class="phead">
+        <div class="phead-l">
+          <span class="picon warm"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+          <h3>Нужно от тебя</h3>
+        </div>
+        <span class="pill n"><i></i>около 50 минут</span>
+      </div>
+      <ul class="dlist">
+        <li><b>Четыре аккаунта.</b> France Travail, La Bonne Alternance, Adzuna и бот через <code>@BotFather</code>. Все бесплатные, около 30 минут.</li>
+        <li><b>Почтовый ящик</b> с включённым IMAP и паролем приложения. На него пойдут оповещения Meteojob и Welcome to the Jungle.</li>
+        <li><b>Машина для запуска.</b> Твой компьютер или самый младший VPS. Требования ниже.</li>
+        <li><b>Ответы на шесть вопросов.</b> Они внизу страницы.</li>
+        <li><b>Обратная связь две недели.</b> Отмечай «не подходит» на промахах, после этого фильтр попадает точнее.</li>
+      </ul>
+      <div class="spec">
+        <i>Процессор</i> 1 ядро, нагрузка около минуты в сутки<br>
+        <i>Память</i> 512 МБ хватает, 1 ГБ с запасом<br>
+        <i>Диск</i> 2 ГБ, база растёт примерно на 40 МБ в год<br>
+        <i>Сеть</i> исходящий HTTPS и IMAP на порт 993<br>
+        <i>Система</i> любой Linux, Python 3.12<br>
+        <i>Аптайм</i> включён в час прогона. Круглосуточно нужен ради кнопок в боте<br>
+        <i>Свой компьютер</i> 0 €<br>
+        <i>VPS</i> младший тариф, порядок 3 до 5 € в месяц
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <span class="eyebrow">Сроки</span>
+  <h2>От трёх до четырёх дней</h2>
+  <div class="grid4">
+    <div class="panel tl done"><div class="pad">
+      <span class="d">Сделано</span><h4>Разбор</h4>
+      <p>Источники проверены, объёмы замерены, схема собрана.</p>
+    </div></div>
+    <div class="panel tl"><div class="pad">
+      <span class="d">День 1</span><h4>Доступы и каркас</h4>
+      <p>Твои 30 минут на аккаунты, дальше база и три API.</p>
+    </div></div>
+    <div class="panel tl"><div class="pad">
+      <span class="d">День 2</span><h4>Фильтры и бот</h4>
+      <p>Склейка, télétravail, география. К вечеру придут первые карточки.</p>
+    </div></div>
+    <div class="panel tl"><div class="pad">
+      <span class="d">День 3 и 4</span><h4>Почта и доводка</h4>
+      <p>Оповещения, наблюдение за прогонами, инструкция.</p>
+    </div></div>
+  </div>
+
+  <div class="panel" style="margin-top:34px"><div class="pad" style="padding:34px 36px">
+    <h3 style="font-family:var(--display);font-weight:600;font-size:26px;margin:0 0 12px">Что мне нужно от тебя, чтобы начать</h3>
+    <p style="color:var(--ink-soft);font-size:16px">
+      Ответь на шесть вопросов и заведи четыре аккаунта. Остальное я закрываю сам.
+      Если в схеме что-то не подходит, скажи до старта.
+    </p>
+    <div class="qlist">
+      <div>Какой уровень диплома готовишь и на какой год</div>
+      <div>Какие даты начала контракта подходят</div>
+      <div>Нужны ли работодателю действия по твоему праву на работу</div>
+      <div>Добавлять ли Développeur Full Stack, Intégrateur Web, Développeur React</div>
+      <div>Odoo в твоём списке это страница найма самой компании</div>
+      <div>Вакансии на английском брать или только на французском</div>
+    </div>
+  </div></div>
+</section>
+
+<footer class="wrap"><span class="foot">Veille · сторож французских вакансий</span></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/7.1.0/apexcharts.min.js" integrity="sha512-N0+WI1lzyjjHpd0bVsvGLavbPzx3SyAANuD/BuwWkyRd+r/YMQYNeU+yb9A0Ycv1TW5kBo21gdn+Brvhh8pnew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
