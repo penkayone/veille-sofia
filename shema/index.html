@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Схема сторожа вакансий</title>
+<meta name="description" content="Что уже работает в боте, чего не хватает и через что идёт вакансия от площадки до сообщения в Telegram.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F1F3F7">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Схема сторожа вакансий">
+<meta property="og:description" content="Что уже работает, чего нет и через что идёт вакансия от площадки до Telegram.">
+<meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232B5090'/><text x='16' y='23' font-size='19' text-anchor='middle' fill='%23fff' font-family='Georgia,serif'>V</text></svg>">
+</head>
+<body>
+<div class="wrap">
+
+<div class="kicker"><a href="../" style="color:inherit">Veille</a> · состояние на 18 сентября 2026</div>
+<h1>Схема сторожа вакансий</h1>
+<p class="lead">
+  Что уже работает, чего нет и через что идёт вакансия от площадки
+  до сообщения в Telegram.
+</p>
+
+<div class="tally">
+  <span class="g"><b>16</b><em>готово</em></span>
+  <span class="r"><b>21</b><em>нет</em></span>
+  <span class="w"><b>2</b><em>можно делать без ключей</em></span>
+  <span><b>54</b><em>теста зелёные</em></span>
+</div>
+
+<div class="legend">
+  <span><i style="background:var(--ok)"></i>готово и проверено запуском</span>
+  <span><i style="background:var(--no)"></i>нет, ждёт доступа</span>
+  <span><i style="background:var(--wait)"></i>нет, но ключей не ждёт</span>
+</div>
+
+<!-- ============ СХЕМА 1 ============ -->
+<figure>
+<svg viewBox="0 0 760 706" role="img"
+     aria-label="Поток вакансии: девять источников сходятся в сбор, дальше склейка повторов, отсев по пяти правилам, база SQLite и отправка в Telegram, которой пока нет">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+    </marker>
+    <marker id="arNo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--no)"/>
+    </marker>
+  </defs>
+
+  <!-- источники -->
+  <g font-family="IBM Plex Sans, sans-serif">
+    <!-- 1 API -->
+    <rect x="16" y="16" width="172" height="136" rx="9" fill="var(--no-bg)" stroke="var(--no)" stroke-width="1"/>
+    <text x="30" y="40" font-size="12.5" font-weight="600" fill="var(--ink)">Официальные API</text>
+    <text x="30" y="64" font-size="12" fill="var(--no)">✗ France Travail</text>
+    <text x="30" y="84" font-size="12" fill="var(--no)">✗ La Bonne Alternance</text>
+    <text x="30" y="104" font-size="12" fill="var(--no)">✗ Adzuna FR</text>
+    <text x="30" y="130" font-size="10.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-faint)">нужны ключи</text>
+
+    <!-- 2 прямой сбор -->
+    <rect x="204" y="16" width="172" height="136" rx="9" fill="var(--card)" stroke="var(--rule)" stroke-width="1"/>
+    <text x="218" y="40" font-size="12.5" font-weight="600" fill="var(--ink)">Прямой сбор</text>
+    <text x="218" y="64" font-size="12" fill="var(--ok)">✓ HelloWork</text>
+    <text x="218" y="84" font-size="12" fill="var(--wait)">✗ BeBee</text>
+    <text x="218" y="104" font-size="12" fill="var(--wait)">✗ lindustrie</text>
+    <text x="218" y="130" font-size="10.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-faint)">ключей не надо</text>
+
+    <!-- 3 почта -->
+    <rect x="392" y="16" width="172" height="136" rx="9" fill="var(--no-bg)" stroke="var(--no)" stroke-width="1"/>
+    <text x="406" y="40" font-size="12.5" font-weight="600" fill="var(--ink)">Почта IMAP</text>
+    <text x="406" y="64" font-size="12" fill="var(--no)">✗ Meteojob</text>
+    <text x="406" y="84" font-size="12" fill="var(--no)">✗ Welcome to Jungle</text>
+    <text x="406" y="104" font-size="12" fill="var(--no)">✗ Indeed</text>
+    <text x="406" y="130" font-size="10.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-faint)">нужен ящик</text>
+
+    <!-- 4 школа -->
+    <rect x="580" y="16" width="164" height="136" rx="9" fill="var(--no-bg)" stroke="var(--no)" stroke-width="1"/>
+    <text x="594" y="40" font-size="12.5" font-weight="600" fill="var(--ink)">От школы</text>
+    <text x="594" y="64" font-size="12" fill="var(--no)">✗ 33 компании</text>
+    <text x="594" y="90" font-size="11" fill="var(--ink-soft)">работодатели для</text>
+    <text x="594" y="106" font-size="11" fill="var(--ink-soft)">прямого обращения</text>
+    <text x="594" y="130" font-size="10.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-faint)">ждём Софию</text>
+  </g>
+
+  <!-- шина сбора -->
+  <g color="var(--flow)" stroke="var(--flow)" fill="none" stroke-width="1.4">
+    <path d="M102 152 V178"/><path d="M290 152 V178"/>
+    <path d="M478 152 V178"/><path d="M662 152 V178"/>
+    <path d="M102 178 H662"/>
+    <path d="M380 178 V204" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- цепочка -->
+  <g font-family="IBM Plex Sans, sans-serif">
+    <rect x="230" y="206" width="300" height="52" rx="9" fill="var(--ok-bg)" stroke="var(--ok)" stroke-width="1.2"/>
+    <text x="380" y="230" font-size="14" font-weight="600" text-anchor="middle" fill="var(--ink)">✓ Сбор</text>
+    <text x="380" y="248" font-size="11" text-anchor="middle" fill="var(--ink-soft)">run.py, пауза между запросами</text>
+
+    <rect x="230" y="298" width="300" height="52" rx="9" fill="var(--ok-bg)" stroke="var(--ok)" stroke-width="1.2"/>
+    <text x="380" y="322" font-size="14" font-weight="600" text-anchor="middle" fill="var(--ink)">✓ Склейка повторов</text>
+    <text x="380" y="340" font-size="11" text-anchor="middle" fill="var(--ink-soft)">адрес · должность + компания + департамент</text>
+
+    <rect x="230" y="390" width="300" height="52" rx="9" fill="var(--ok-bg)" stroke="var(--ok)" stroke-width="1.2"/>
+    <text x="380" y="414" font-size="14" font-weight="600" text-anchor="middle" fill="var(--ink)">✓ Отсев, пять правил</text>
+    <text x="380" y="432" font-size="11" text-anchor="middle" fill="var(--ink-soft)">у каждого решения названа причина</text>
+
+    <rect x="230" y="482" width="300" height="52" rx="9" fill="var(--ok-bg)" stroke="var(--ok)" stroke-width="1.2"/>
+    <text x="380" y="506" font-size="14" font-weight="600" text-anchor="middle" fill="var(--ink)">✓ База SQLite</text>
+    <text x="380" y="524" font-size="11" text-anchor="middle" fill="var(--ink-soft)">пять таблиц, состояние переживает перезапуск</text>
+
+    <rect x="230" y="588" width="300" height="70" rx="9" fill="var(--no-bg)" stroke="var(--no)"
+          stroke-width="1.2" stroke-dasharray="5 4"/>
+    <text x="380" y="612" font-size="14" font-weight="600" text-anchor="middle" fill="var(--ink)">✗ Отправка в Telegram</text>
+    <text x="380" y="630" font-size="11" text-anchor="middle" fill="var(--ink-soft)">карточка, кнопки, команды</text>
+    <text x="380" y="648" font-size="10.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" fill="var(--no)">нет токена бота</text>
+  </g>
+
+  <!-- стрелки цепочки с подписями -->
+  <g color="var(--flow)" stroke="var(--flow)" fill="none" stroke-width="1.4">
+    <path d="M380 258 V296" marker-end="url(#ar)"/>
+    <path d="M380 350 V388" marker-end="url(#ar)"/>
+    <path d="M380 442 V480" marker-end="url(#ar)"/>
+  </g>
+  <g color="var(--no)" stroke="var(--no)" fill="none" stroke-width="1.4" stroke-dasharray="5 4">
+    <path d="M380 534 V586" marker-end="url(#arNo)"/>
+  </g>
+  <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--ink-faint)">
+    <text x="392" y="282">сырые карточки</text>
+    <text x="392" y="374">без дублей</text>
+    <text x="392" y="466">прошедшие отсев</text>
+    <text x="392" y="566">только новые</text>
+  </g>
+
+  <!-- отсеянные уходят вбок -->
+  <g color="var(--ink-faint)" stroke="var(--ink-faint)" fill="none" stroke-width="1.2" stroke-dasharray="4 4">
+    <path d="M530 416 H636" marker-end="url(#ar)"/>
+  </g>
+  <text x="644" y="412" font-size="11" font-family="IBM Plex Sans, sans-serif" fill="var(--ink-soft)">отсеяна,</text>
+  <text x="644" y="428" font-size="11" font-family="IBM Plex Sans, sans-serif" fill="var(--ink-soft)">причина в журнале</text>
+</svg>
+<figcaption>
+  Девять источников сходятся в один сбор. Дальше вакансия идёт по одной цепочке,
+  и четыре её звена уже работают. Не хватает последнего: отправлять некуда,
+  потому что нет токена бота.
+</figcaption>
+</figure>
+
+<!-- ============ СХЕМА 2 ============ -->
+<figure>
+<svg viewBox="0 0 760 330" role="img"
+     aria-label="Воронка прогона 18 сентября: 60 карточек получено, 48 осталось после склейки, 2 прошли географию, 0 прошли свежесть">
+  <defs>
+    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-faint)"/>
+    </marker>
+  </defs>
+  <g font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="var(--ink)">
+    <text x="16" y="30" font-weight="600">получено с HelloWork</text>
+    <text x="16" y="96" font-weight="600">после склейки повторов</text>
+    <text x="16" y="162" font-weight="600">прошли географию</text>
+    <text x="16" y="228" font-weight="600">прошли свежесть</text>
+  </g>
+
+  <!-- бары -->
+  <g>
+    <rect x="16" y="40" width="520" height="26" rx="5" fill="var(--flow)" opacity=".85"/>
+    <text x="548" y="58" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="var(--ink)">60</text>
+
+    <rect x="16" y="106" width="416" height="26" rx="5" fill="var(--flow)" opacity=".7"/>
+    <text x="548" y="124" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="var(--ink)">48</text>
+
+    <rect x="16" y="172" width="18" height="26" rx="5" fill="var(--wait)"/>
+    <text x="548" y="190" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="var(--ink)">2</text>
+
+    <rect x="16" y="238" width="4" height="26" rx="2" fill="var(--no)"/>
+    <text x="548" y="256" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="var(--no)">0</text>
+  </g>
+
+  <!-- что отвалилось -->
+  <g font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="var(--ink-soft)">
+    <line x1="600" y1="53" x2="600" y2="119" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="612" y="90">12 дублей</text>
+
+    <line x1="600" y1="119" x2="600" y2="185" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="612" y="150">46 без удалёнки</text>
+    <text x="612" y="166">и не Руан</text>
+
+    <line x1="600" y1="185" x2="600" y2="251" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="612" y="222">2 старше 7 дней</text>
+  </g>
+
+  <line x1="16" y1="290" x2="744" y2="290" stroke="var(--rule)" stroke-width="1"/>
+  <text x="16" y="312" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--ink-soft)">
+    Ноль на выходе это верный ответ, а не поломка: сегодня подходящих вакансий на этой площадке не было.
+  </text>
+</svg>
+<figcaption>
+  Настоящий прогон 18 сентября, цифры сняты с него, а не придуманы.
+  Две руанские вакансии дошли до последнего правила и отсеялись по возрасту:
+  им 18 и 21 день при пороге в неделю.
+</figcaption>
+</figure>
+
+<!-- ============ СХЕМА 3 ============ -->
+<figure>
+<svg viewBox="0 0 760 250" role="img"
+     aria-label="Порядок разблокировки: ключи трёх API, токен бота, почтовый ящик, список компаний, сервер. После второго шага продукт уже работает">
+  <defs>
+    <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--flow)"/>
+    </marker>
+  </defs>
+  <g font-family="IBM Plex Sans, sans-serif">
+    <g>
+      <rect x="16" y="40" width="132" height="76" rx="9" fill="var(--card)" stroke="var(--rule)"/>
+      <circle cx="40" cy="62" r="11" fill="var(--flow)" opacity=".18"/>
+      <text x="40" y="66" font-size="11" font-weight="600" text-anchor="middle" fill="var(--flow)">1</text>
+      <text x="58" y="66" font-size="12.5" font-weight="600" fill="var(--ink)">Ключи API</text>
+      <text x="30" y="90" font-size="11" fill="var(--ink-soft)">основной объём</text>
+      <text x="30" y="105" font-size="11" fill="var(--ink-soft)">вакансий</text>
+    </g>
+    <g>
+      <rect x="164" y="40" width="132" height="76" rx="9" fill="var(--ok-bg)" stroke="var(--ok)" stroke-width="1.4"/>
+      <circle cx="188" cy="62" r="11" fill="var(--ok)" opacity=".2"/>
+      <text x="188" y="66" font-size="11" font-weight="600" text-anchor="middle" fill="var(--ok)">2</text>
+      <text x="206" y="66" font-size="12.5" font-weight="600" fill="var(--ink)">Токен бота</text>
+      <text x="178" y="90" font-size="11" fill="var(--ink-soft)">отправка и кнопки</text>
+      <text x="178" y="105" font-size="11" font-weight="600" fill="var(--ok)">продукт работает</text>
+    </g>
+    <g>
+      <rect x="312" y="40" width="132" height="76" rx="9" fill="var(--card)" stroke="var(--rule)"/>
+      <circle cx="336" cy="62" r="11" fill="var(--flow)" opacity=".18"/>
+      <text x="336" y="66" font-size="11" font-weight="600" text-anchor="middle" fill="var(--flow)">3</text>
+      <text x="354" y="66" font-size="12.5" font-weight="600" fill="var(--ink)">Ящик</text>
+      <text x="326" y="90" font-size="11" fill="var(--ink-soft)">удалёнка,</text>
+      <text x="326" y="105" font-size="11" fill="var(--ink-soft)">главный канал</text>
+    </g>
+    <g>
+      <rect x="460" y="40" width="132" height="76" rx="9" fill="var(--card)" stroke="var(--rule)"/>
+      <circle cx="484" cy="62" r="11" fill="var(--flow)" opacity=".18"/>
+      <text x="484" y="66" font-size="11" font-weight="600" text-anchor="middle" fill="var(--flow)">4</text>
+      <text x="502" y="66" font-size="12.5" font-weight="600" fill="var(--ink)">33 компании</text>
+      <text x="474" y="90" font-size="11" fill="var(--ink-soft)">второй поток</text>
+    </g>
+    <g>
+      <rect x="608" y="40" width="136" height="76" rx="9" fill="var(--card)" stroke="var(--rule)"/>
+      <circle cx="632" cy="62" r="11" fill="var(--flow)" opacity=".18"/>
+      <text x="632" y="66" font-size="11" font-weight="600" text-anchor="middle" fill="var(--flow)">5</text>
+      <text x="650" y="66" font-size="12.5" font-weight="600" fill="var(--ink)">Сервер</text>
+      <text x="622" y="90" font-size="11" fill="var(--ink-soft)">прогон без рук</text>
+    </g>
+  </g>
+  <g stroke="var(--flow)" fill="none" stroke-width="1.4">
+    <path d="M148 78 H162" marker-end="url(#ar3)"/>
+    <path d="M296 78 H310" marker-end="url(#ar3)"/>
+    <path d="M444 78 H458" marker-end="url(#ar3)"/>
+    <path d="M592 78 H606" marker-end="url(#ar3)"/>
+  </g>
+  <line x1="16" y1="160" x2="296" y2="160" stroke="var(--ok)" stroke-width="2.5"/>
+  <text x="16" y="182" font-family="IBM Plex Sans, sans-serif" font-size="12.5" font-weight="600" fill="var(--ok)">
+    рабочий минимум, около 7 часов
+  </text>
+  <line x1="312" y1="160" x2="744" y2="160" stroke="var(--rule)" stroke-width="2.5"/>
+  <text x="312" y="182" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="var(--ink-soft)">
+    доводка, ещё около 6 часов
+  </text>
+  <text x="16" y="220" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--ink-soft)">
+    Первые два шага занимают у Антона около 40 минут и разблокируют рабочий продукт.
+  </text>
+</svg>
+<figcaption>
+  Порядок не случайный: после второго шага Софии уже можно отдавать бота,
+  а остальное доводится сверху, пока она им пользуется.
+</figcaption>
+</figure>
+
+<div class="section">
+  <h2>Источники по одному</h2>
+  <table>
+    <thead><tr><th></th><th>Источник</th><th>Как берём</th><th>Чего не хватает</th></tr></thead>
+    <tbody>
+      <tr><td class="s y">✓</td><td>HelloWork</td><td>прямой сбор</td><td class="note">ничего, работает</td></tr>
+      <tr><td class="s n">✗</td><td>France Travail</td><td>API, OAuth2</td><td class="note"><code>client_id</code> и <code>client_secret</code></td></tr>
+      <tr><td class="s n">✗</td><td>La Bonne Alternance</td><td>API по токену</td><td class="note">токен из кабинета</td></tr>
+      <tr><td class="s n">✗</td><td>Adzuna FR</td><td>API по ключу</td><td class="note"><code>app_id</code> и <code>app_key</code></td></tr>
+      <tr><td class="s n">✗</td><td>BeBee</td><td>прямой сбор</td><td class="note">ничего, только моё время</td></tr>
+      <tr><td class="s n">✗</td><td>lindustrie-recrute</td><td>прямой сбор</td><td class="note">ничего, только моё время</td></tr>
+      <tr><td class="s n">✗</td><td>Meteojob</td><td>письма по IMAP</td><td class="note">ящик и пароль приложения</td></tr>
+      <tr><td class="s n">✗</td><td>Welcome to the Jungle</td><td>письма по IMAP</td><td class="note">тот же ящик</td></tr>
+      <tr><td class="s n">✗</td><td>Indeed</td><td>письма по IMAP</td><td class="note">тот же ящик</td></tr>
+      <tr><td class="s n">✗</td><td>33 компании от школы</td><td>файл</td><td class="note">список от Софии</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  Цифры сняты с прогона 18 сентября 2026, а не рассчитаны.<br>
+  Код: репозиторий penkayone/veille-bot, приватный. 54 теста зелёные.<br>
+  LinkedIn из схемы убран сознательно: запрет на автоматический доступ в их robots.txt.<br>
+  <a href="../" style="color:var(--flow)">Вернуться к предложению</a>
+</footer>
+
+</div>
+</body>
+</html>
